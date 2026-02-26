@@ -61,3 +61,11 @@ div.elem {
     border-radius: 5px;
     background-color: lightslategray;
 }
+
+.feladat img {
+    width: 200px;
+}
+
+.scale {
+    scale: 1.1;
+}

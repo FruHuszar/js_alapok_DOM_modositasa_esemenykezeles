@@ -6,7 +6,6 @@ window.addEventListener("load", function () {
     elemekFormazasa1();
     esemenyKezeles1();
     esemenyKezeles2();
-    esemenyKezeles3();
     esemenyKezeles4();
 });
 
@@ -32,7 +31,7 @@ function elemekElerese4() {
 
     for (let index = 0; index < 5; index++) {
         let szam = Math.floor(Math.random()*30)
-        szoveg += `<li> {$szam} </li>`;
+        szoveg += `<li> ${szam} </li>`;
     }
 
    szoveg += "</ol>";
@@ -46,18 +45,58 @@ function elemekFormazasa1() {
 }
 
 function esemenyKezeles1() {
-    //...
+    let listaElem = document.getElementsByClassName("lista")[0];
+    let kattElem = document.querySelector(".kattintasutan");
+    listaElem.addEventListener("click", belekerul)
+
+    function belekerul(){
+        kattElem.innerHTML = listaElem.innerHTML;
+    }
 }
 
+//ebben a sectionban lévő "feladat" azonosítóval ellátott elembe elhelyez egy gombot. A gombra kattintva pedig ugyanabba a divbe a gomb mellé még hozzáad egy újab divet, amiben egy kép van.
 function esemenyKezeles2() {
-    //...
+    let feladatElem = document.querySelector(".feladat");
+    feladatElem.innerHTML="<button>KATT</button>"
+
+    let gombElem = document.querySelector(".feladat button");
+    gombElem.addEventListener("click", kepBerak);
+
+    function kepBerak(){
+        feladatElem.innerHTML+="<div><img src='https://picsum.photos/seed/picsum/200/300' alt='kepalairas'></div>"
+
+        esemenyKezeles3();
+    }
 }
 
 function esemenyKezeles3() {
-    //...
+    let kepElem = document.querySelector(".feladat img");
+    kepElem.addEventListener("mouseover", meretMegvaltozik);
+
+    function meretMegvaltozik(){
+        kepElem.classList.add("scale");
+    }
+
+    kepElem.addEventListener("mouseout", meretMegvaltozik2);
+
+    function meretMegvaltozik2(){
+        kepElem.classList.remove("scale");
+    }    
+
 }
 
+
+//Az event.target utasítás adja vissza annak a eseményt kiváltó elemet.
 function esemenyKezeles4() {
-    //...
+    let eredmenyElem = document.querySelector(".megjelenito")
+    let szamElemek = document.querySelectorAll(".tarolo div")
+    for (let index = 0; index < szamElemek.length; index++) {
+        szamElemek[index].addEventListener("click", kiirasok)
+    }
+
+    function kiirasok(){
+        let szoveg = event.target.innerHTML;
+        eredmenyElem.innerHTML = `<p> ${szoveg} </p>`
+    }
 }
 
